@@ -22,12 +22,13 @@ const Logo = ({ loading }) => {
 const Joke = ({ value, categories }) => {
   //console.log('<Joke>value: ', value)
   return (
-  <div className="Joke">
+    <div className="Joke">
     <code className="Joke-Value">{value}</code>
-     {/* { per ciascun elemento di 'categories', renderizzare:
-      <span className="Selected-Cat" ... >
-        <code>{* QUI LA STRINGA DELLA SINGOLA CATEGORIA *}</code>
-      </span> } */}
+     {Array.isArray(categories) && categories.map((category, index) =>
+      <span className="Selected-Cat" key={index}>
+        <code>{category}</code>
+      </span>
+    )}
   </div>
   )
 }
@@ -108,9 +109,10 @@ const onInputTextChange =(event)=> {
             className="Chuck-Logo"
             alt="chuck-logo"
           />
-          <Joke  
-    value={fetchedJoke.value}
-          /> 
+          {fetchedJoke !== undefined && <Joke 
+          value ={fetchedJoke.value}
+          categories ={fetchedJoke.categories}
+          />}
         </div>
         <div className="footer">
         <code>Esame di React per cfp-futura. Grazie ad <a href="https://api.chucknorris.io">api.chucknorris.io</a> per l'immagine e le api. Docente: Vito Vitale. Studente: Domenico Mucci </code>
